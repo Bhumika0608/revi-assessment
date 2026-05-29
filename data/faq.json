@@ -1,0 +1,447 @@
+[
+  {
+    "id": "faq_address",
+    "question": "Where are you located?",
+    "answer": "We're at 127 NW 25th St, Miami, FL 33127 — right in the heart of Wynwood. Look for the big mural on the side of the building.",
+    "tags": [
+      "location",
+      "address",
+      "where",
+      "find",
+      "directions",
+      "map",
+      "wynwood"
+    ]
+  },
+  {
+    "id": "faq_hours",
+    "question": "What are your hours?",
+    "answer": "We're open every day, Monday through Sunday, 11:00 AM – 10:00 PM. Last order is taken at 9:45 PM.",
+    "tags": [
+      "hours",
+      "open",
+      "close",
+      "time",
+      "schedule",
+      "when",
+      "late",
+      "early"
+    ]
+  },
+  {
+    "id": "faq_phone",
+    "question": "What is your phone number?",
+    "answer": "You can reach us at {phone}.",
+    "tags": [
+      "phone",
+      "call",
+      "contact",
+      "number",
+      "telephone"
+    ]
+  },
+  {
+    "id": "faq_parking",
+    "question": "Is there parking available?",
+    "answer": "Street parking is available on NW 2nd Ave and the surrounding streets — it's free and usually easy on weekday lunchtimes. On Friday and Saturday evenings Wynwood gets busy, so we recommend arriving early or using the paid lot on NW 26th St (about a 2-minute walk). Several pay-by-phone spots are also marked along NW 25th St right outside.",
+    "tags": [
+      "parking",
+      "park",
+      "car",
+      "lot",
+      "street",
+      "drive",
+      "vehicle"
+    ]
+  },
+  {
+    "id": "faq_wifi",
+    "question": "Do you have free WiFi?",
+    "answer": "Yes! Free WiFi is available for all guests. Network: TalkinTacos_Guest — no password required.",
+    "tags": [
+      "wifi",
+      "wi-fi",
+      "internet",
+      "network",
+      "password",
+      "connect",
+      "wireless"
+    ]
+  },
+  {
+    "id": "faq_restrooms",
+    "question": "Where are the restrooms?",
+    "answer": "Restrooms are inside toward the back, past the kitchen pickup counter. They're available to all guests and fully accessible.",
+    "tags": [
+      "restroom",
+      "bathroom",
+      "toilet",
+      "washroom",
+      "wc",
+      "facilities"
+    ]
+  },
+  {
+    "id": "faq_outdoor",
+    "question": "Do you have outdoor seating?",
+    "answer": "Yes — we have a covered patio in the back that seats about 30 guests. It's open year-round. On cool evenings it's one of the best spots in Wynwood.",
+    "tags": [
+      "outdoor",
+      "patio",
+      "outside",
+      "seating",
+      "terrace",
+      "al fresco"
+    ]
+  },
+  {
+    "id": "faq_reservations",
+    "question": "Can I make a reservation?",
+    "answer": "We're walk-in only — no reservations. Groups of 8 or more should call ahead at {phone} so we can arrange seating. Wait times on weekends are typically 10–20 minutes.",
+    "tags": [
+      "reservation",
+      "book",
+      "reserve",
+      "table",
+      "wait",
+      "walk-in",
+      "ahead"
+    ]
+  },
+  {
+    "id": "faq_delivery",
+    "question": "Do you deliver?",
+    "answer": "Yes! We deliver through Uber Eats and DoorDash. Delivery is available during all business hours. You can also order through our website for pickup.",
+    "tags": [
+      "delivery",
+      "deliver",
+      "uber eats",
+      "doordash",
+      "grubhub",
+      "online",
+      "app"
+    ]
+  },
+  {
+    "id": "faq_takeout",
+    "question": "Can I order for pickup or takeout?",
+    "answer": "Absolutely. Place your order through this chat and pick it up at the counter — typical wait is 10–15 minutes. You can also call {phone} to order by phone.",
+    "tags": [
+      "pickup",
+      "takeout",
+      "take out",
+      "to go",
+      "carry out",
+      "collect"
+    ]
+  },
+  {
+    "id": "faq_catering",
+    "question": "Do you do catering?",
+    "answer": "Yes — we cater events of all sizes, from office lunches to weddings. Minimum order is 20 people. Email catering@talkintacos.com or call {phone} at least 48 hours in advance.",
+    "tags": [
+      "catering",
+      "cater",
+      "event",
+      "party",
+      "office",
+      "wedding",
+      "large group",
+      "bulk"
+    ]
+  },
+  {
+    "id": "faq_kids",
+    "question": "Do you have a kids menu?",
+    "answer": "Yes — we have a kids section with smaller portions and milder flavors: mini tacos, quesadillas, rice and beans, and kids-sized drinks. All kids meals come with a small bag of chips.",
+    "tags": [
+      "kids",
+      "children",
+      "child",
+      "family",
+      "little",
+      "junior",
+      "young",
+      "baby"
+    ]
+  },
+  {
+    "id": "faq_payment",
+    "question": "What payment methods do you accept?",
+    "answer": "We accept all major credit and debit cards (Visa, Mastercard, Amex, Discover), Apple Pay, Google Pay, and cash. No checks.",
+    "tags": [
+      "payment",
+      "pay",
+      "cash",
+      "credit",
+      "card",
+      "apple pay",
+      "google pay",
+      "amex",
+      "visa"
+    ]
+  },
+  {
+    "id": "faq_tip",
+    "question": "Is tipping expected?",
+    "answer": "Tips are always appreciated but never required. For dine-in, our team works hard and 18–20% is the local standard. For pickup and delivery, even a small tip goes a long way.",
+    "tags": [
+      "tip",
+      "gratuity",
+      "tipping",
+      "service",
+      "staff"
+    ]
+  },
+  {
+    "id": "faq_happy_hour",
+    "question": "Do you have happy hour?",
+    "answer": "Yes! Happy hour runs Monday–Friday 3:00 PM – 6:00 PM. All aguas frescas and soft drinks are $1 off, and we have rotating taco specials starting at $2.99.",
+    "tags": [
+      "happy hour",
+      "deal",
+      "discount",
+      "specials",
+      "offer",
+      "promotion"
+    ]
+  },
+  {
+    "id": "faq_loyalty",
+    "question": "Do you have a loyalty program?",
+    "answer": "Yes — download the Talkin' Tacos app to earn points on every order. Every $50 spent = $5 reward. Ask at the counter for a free signup card if you prefer a physical punch card.",
+    "tags": [
+      "loyalty",
+      "rewards",
+      "points",
+      "app",
+      "punch card",
+      "discount",
+      "regular"
+    ]
+  },
+  {
+    "id": "faq_accessibility",
+    "question": "Is the restaurant wheelchair accessible?",
+    "answer": "Yes, our restaurant is fully wheelchair accessible. We have a step-free entrance on NW 25th St, wide aisles, accessible restrooms, and a hearing loop at the counter.",
+    "tags": [
+      "wheelchair",
+      "accessible",
+      "accessibility",
+      "disability",
+      "handicap",
+      "mobility",
+      "ada"
+    ]
+  },
+  {
+    "id": "faq_nut_allergy",
+    "question": "Do you have nut-free options? I have a nut allergy.",
+    "answer": "Most of our menu is naturally nut-free. However, some desserts (churros dipping sauce, certain mole sauces) may contain tree nuts or be made in a shared kitchen. Please inform your server or include a note in your order — we can confirm which specific dishes are safe and take extra precautions in prep. For severe allergies, we recommend calling ahead at {phone}.",
+    "tags": [
+      "nut",
+      "nuts",
+      "peanut",
+      "tree nut",
+      "allergy",
+      "allergic",
+      "anaphylaxis",
+      "safe",
+      "nut-free"
+    ]
+  },
+  {
+    "id": "faq_gluten_allergy",
+    "question": "Do you have gluten-free options? I have celiac disease.",
+    "answer": "Yes — many of our dishes can be made gluten-free. Corn tortillas are naturally gluten-free. Bowls, salads, and most proteins are also gluten-free as prepared. However, our kitchen does handle wheat flour for flour tortillas and some fried items, so cross-contamination is possible. We cannot guarantee a fully gluten-free environment. Please note your allergy in your order and we'll take precautions.",
+    "tags": [
+      "gluten",
+      "celiac",
+      "gluten-free",
+      "wheat",
+      "allergy",
+      "intolerance",
+      "coeliac",
+      "flour"
+    ]
+  },
+  {
+    "id": "faq_dairy_allergy",
+    "question": "Can I avoid dairy? I'm lactose intolerant.",
+    "answer": "Absolutely. Most of our tacos and bowls are dairy-free by default — cheese and sour cream are toppings you can skip. Just remove them from your customization or add 'no dairy' in special instructions. Let us know and we'll make sure your order is dairy-free.",
+    "tags": [
+      "dairy",
+      "lactose",
+      "milk",
+      "cheese",
+      "cream",
+      "dairy-free",
+      "intolerant",
+      "lactose-free"
+    ]
+  },
+  {
+    "id": "faq_halal",
+    "question": "Is your meat halal or kosher?",
+    "answer": "Our proteins are not currently certified halal or kosher. We source from local Miami suppliers. If this is important to you, our vegetarian and vegan options are a great alternative — we have an extensive plant-based menu.",
+    "tags": [
+      "halal",
+      "kosher",
+      "certified",
+      "meat",
+      "religious",
+      "muslim",
+      "jewish",
+      "pork-free"
+    ]
+  },
+  {
+    "id": "faq_spicy",
+    "question": "How spicy is your food?",
+    "answer": "Most menu items are mild to medium by default. All tacos, burritos, and bowls let you choose your salsa heat level: mild, medium, hot, or habanero. If you're heat-sensitive, ask for mild — our kitchen is happy to accommodate. Birria consomé and some specialty items have a natural kick.",
+    "tags": [
+      "spicy",
+      "heat",
+      "hot",
+      "mild",
+      "spice",
+      "pepper",
+      "habanero",
+      "jalapeño",
+      "chili"
+    ]
+  },
+  {
+    "id": "faq_cross_contamination",
+    "question": "Do you handle allergens in the kitchen?",
+    "answer": "Yes — our kitchen handles the 9 major allergens including gluten (wheat flour), shellfish, tree nuts, dairy, eggs, and soy. While we take care with allergies, we cannot guarantee zero cross-contamination as all proteins share cooking surfaces. For life-threatening allergies, please call us at {phone} before visiting.",
+    "tags": [
+      "cross contamination",
+      "allergen",
+      "kitchen",
+      "shared",
+      "cooking",
+      "surface",
+      "safe",
+      "allergy"
+    ]
+  },
+  {
+    "id": "faq_vegan",
+    "question": "What vegan options do you have?",
+    "answer": null,
+    "type": "dietary_query",
+    "dietary_tag": "vegan",
+    "tags": [
+      "vegan",
+      "plant-based",
+      "plant based",
+      "no animal",
+      "no meat",
+      "no dairy",
+      "animal-free"
+    ]
+  },
+  {
+    "id": "faq_vegetarian",
+    "question": "What vegetarian options do you have?",
+    "answer": null,
+    "type": "dietary_query",
+    "dietary_tag": "vegetarian",
+    "tags": [
+      "vegetarian",
+      "veggie",
+      "no meat",
+      "meatless",
+      "plant"
+    ]
+  },
+  {
+    "id": "faq_gluten_free_menu",
+    "question": "What gluten-free menu items do you have?",
+    "answer": null,
+    "type": "dietary_query",
+    "dietary_tag": "gluten-free",
+    "tags": [
+      "gluten-free",
+      "gluten free",
+      "no gluten",
+      "celiac",
+      "wheat-free"
+    ]
+  },
+  {
+    "id": "faq_gift_cards",
+    "question": "Do you sell gift cards?",
+    "answer": "Yes! Physical gift cards are available at the counter in denominations of $25, $50, and $100. Digital gift cards can be purchased on our website.",
+    "tags": [
+      "gift card",
+      "gift",
+      "present",
+      "voucher",
+      "certificate"
+    ]
+  },
+  {
+    "id": "faq_group_dining",
+    "question": "Can you accommodate large groups?",
+    "answer": "Yes — for groups of 8 or more we recommend calling ahead at {phone}. For groups of 20+, ask about our family-style platters and group pricing. We can reserve our back patio for private events.",
+    "tags": [
+      "group",
+      "large party",
+      "corporate",
+      "team",
+      "bulk",
+      "private",
+      "event"
+    ]
+  },
+  {
+    "id": "faq_instagram",
+    "question": "What is your Instagram?",
+    "answer": "Follow us @TalkinTacosMiami on Instagram for daily specials, new menu drops, and Wynwood events!",
+    "tags": [
+      "instagram",
+      "social media",
+      "twitter",
+      "facebook",
+      "tiktok",
+      "follow",
+      "online"
+    ]
+  },
+  {
+    "id": "faq_wait_time",
+    "question": "How long is the wait for food?",
+    "answer": "Most orders are ready in 10–15 minutes. During peak hours (Friday/Saturday evenings) allow up to 20 minutes. For online orders and large catering orders, timing is confirmed at checkout.",
+    "tags": [
+      "wait",
+      "time",
+      "how long",
+      "ready",
+      "minutes",
+      "eta",
+      "slow",
+      "fast"
+    ]
+  },
+  {
+    "id": "faq_dairy_free",
+    "question": "Do you have any dairy-free options?",
+    "answer": null,
+    "type": "dietary_query",
+    "dietary_tag": "dairy-free",
+    "tags": [
+      "dairy",
+      "dairy-free",
+      "dairy free",
+      "no dairy",
+      "lactose",
+      "lactose-free",
+      "lactose intolerant",
+      "non-dairy",
+      "milk-free",
+      "casein"
+    ]
+  }
+]

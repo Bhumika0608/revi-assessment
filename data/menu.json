@@ -1,0 +1,539 @@
+{
+  "restaurant": {
+    "name": "Talkin Tacos",
+    "location": {
+      "address": "127 NW 25th St, Miami, FL 33127",
+      "neighborhood": "Wynwood",
+      "phone": "(305) 555-0142"
+    },
+    "hours": {
+      "monday": "11:00 AM – 10:00 PM",
+      "tuesday": "11:00 AM – 10:00 PM",
+      "wednesday": "11:00 AM – 10:00 PM",
+      "thursday": "11:00 AM – 10:00 PM",
+      "friday": "11:00 AM – 10:00 PM",
+      "saturday": "11:00 AM – 10:00 PM",
+      "sunday": "11:00 AM – 10:00 PM"
+    },
+    "hours_line": "Mon–Sun 11am–10pm",
+    "currency": "USD",
+    "tax_rate": 0.07
+  },
+  "global_options_reference": {
+    "salsa": ["mild", "medium", "hot", "habanero"],
+    "tortilla": ["corn", "flour"],
+    "protein": ["birria", "carne_asada", "al_pastor", "pollo_asado", "carnitas", "veggie"]
+  },
+  "items": [
+    {
+      "id": "taco_birria",
+      "category": "tacos",
+      "name": "Birria Taco",
+      "description": "Slow-braised beef on a corn tortilla, served with consomé for dipping.",
+      "price": 4.99,
+      "available": true,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["beef"],
+      "tags": ["popular", "signature"]
+    },
+    {
+      "id": "taco_carne_asada",
+      "category": "tacos",
+      "name": "Carne Asada Taco",
+      "description": "Grilled marinated steak with onions, cilantro, and lime.",
+      "price": 4.49,
+      "available": true,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["beef"],
+      "tags": []
+    },
+    {
+      "id": "taco_al_pastor",
+      "category": "tacos",
+      "name": "Al Pastor Taco",
+      "description": "Marinated pork with grilled pineapple, onions, and cilantro.",
+      "price": 4.49,
+      "available": true,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["pork"],
+      "tags": []
+    },
+    {
+      "id": "taco_pollo",
+      "category": "tacos",
+      "name": "Pollo Asado Taco",
+      "description": "Grilled citrus-marinated chicken with onions and cilantro.",
+      "price": 4.29,
+      "available": true,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["chicken"],
+      "tags": ["chicken", "pollo taco"]
+    },
+    {
+      "id": "taco_carnitas",
+      "category": "tacos",
+      "name": "Carnitas Taco",
+      "description": "Slow-cooked pulled pork with onions, cilantro, and salsa verde.",
+      "price": 4.49,
+      "available": true,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["pork"],
+      "tags": []
+    },
+    {
+      "id": "taco_veggie",
+      "category": "tacos",
+      "name": "Veggie Taco",
+      "description": "Grilled peppers, onions, and zucchini with avocado crema.",
+      "price": 3.99,
+      "available": true,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["vegetarian"],
+      "tags": []
+    },
+    {
+      "id": "taco_fish",
+      "category": "tacos",
+      "name": "Baja Fish Taco",
+      "description": "Beer-battered fish with cabbage slaw and chipotle aioli.",
+      "price": 5.49,
+      "available": true,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["fish", "contains_gluten"],
+      "tags": []
+    },
+    {
+      "id": "taco_shrimp",
+      "category": "tacos",
+      "name": "Camarón Taco",
+      "description": "Grilled shrimp with chipotle crema, cabbage, and pickled onions.",
+      "price": 5.99,
+      "available": false,
+      "options": {
+        "tortilla": {"choices": ["corn", "flour"], "default": "corn", "required": false},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["shellfish"],
+      "tags": []
+    },
+    {
+      "id": "burrito_birria",
+      "category": "burritos",
+      "name": "Birria Burrito",
+      "description": "Slow-braised beef, rice, beans, cheese, onions, cilantro, in a flour tortilla. Served with consomé.",
+      "price": 13.99,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5},
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_rice", "name": "No rice", "price": 0.0},
+        {"id": "no_beans", "name": "No beans", "price": 0.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["beef", "contains_dairy", "contains_gluten"],
+      "tags": ["popular"]
+    },
+    {
+      "id": "burrito_california",
+      "category": "burritos",
+      "name": "California Burrito",
+      "description": "Carne asada, fries, cheese, sour cream, pico de gallo in a flour tortilla.",
+      "price": 13.49,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5},
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_rice", "name": "No rice", "price": 0.0},
+        {"id": "no_beans", "name": "No beans", "price": 0.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["beef", "contains_dairy", "contains_gluten"],
+      "tags": []
+    },
+    {
+      "id": "burrito_veggie",
+      "category": "burritos",
+      "name": "Veggie Burrito",
+      "description": "Grilled veggies, rice, black beans, cheese, sour cream, salsa in a flour tortilla.",
+      "price": 11.99,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5},
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "no_rice", "name": "No rice", "price": 0.0},
+        {"id": "no_beans", "name": "No beans", "price": 0.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["vegetarian", "contains_dairy", "contains_gluten"],
+      "tags": []
+    },
+    {
+      "id": "burrito_build_your_own",
+      "category": "burritos",
+      "name": "Build Your Own Burrito",
+      "description": "Choose your protein, plus rice, beans, cheese, salsa, and toppings in a flour tortilla.",
+      "price": 12.99,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false},
+        "protein": {"choices": ["birria", "carne_asada", "al_pastor", "pollo_asado", "carnitas", "veggie"], "required": true}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5},
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_rice", "name": "No rice", "price": 0.0},
+        {"id": "no_beans", "name": "No beans", "price": 0.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["contains_gluten"],
+      "tags": []
+    },
+    {
+      "id": "bowl_birria",
+      "category": "bowls",
+      "name": "Birria Bowl",
+      "description": "Slow-braised beef over rice and beans, topped with cheese, onions, and cilantro. Served with consomé.",
+      "price": 13.49,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false},
+        "rice": {"choices": ["white", "brown", "none"], "default": "white", "required": false},
+        "beans": {"choices": ["black", "pinto", "none"], "default": "black", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5},
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_rice", "name": "No rice", "price": 0.0},
+        {"id": "no_beans", "name": "No beans", "price": 0.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["beef", "contains_dairy"],
+      "tags": []
+    },
+    {
+      "id": "bowl_pollo",
+      "category": "bowls",
+      "name": "Pollo Bowl",
+      "description": "Grilled chicken over rice and beans with pico de gallo and avocado crema.",
+      "price": 12.49,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false},
+        "rice": {"choices": ["white", "brown", "none"], "default": "white", "required": false},
+        "beans": {"choices": ["black", "pinto", "none"], "default": "black", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5},
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "extra_meat", "name": "Extra meat", "price": 3.0},
+        {"id": "no_rice", "name": "No rice", "price": 0.0},
+        {"id": "no_beans", "name": "No beans", "price": 0.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["chicken", "contains_dairy"],
+      "tags": ["chicken", "chicken bowl", "pollo bowl"]
+    },
+    {
+      "id": "bowl_veggie",
+      "category": "bowls",
+      "name": "Veggie Bowl",
+      "description": "Grilled veggies over rice and beans with pico de gallo and avocado. Vegan as ordered.",
+      "price": 10.99,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false},
+        "rice": {"choices": ["white", "brown", "none"], "default": "white", "required": false},
+        "beans": {"choices": ["black", "pinto", "none"], "default": "black", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5},
+        {"id": "add_cheese", "name": "Add cheese", "price": 0.75},
+        {"id": "no_rice", "name": "No rice", "price": 0.0},
+        {"id": "no_beans", "name": "No beans", "price": 0.0},
+        {"id": "no_onion", "name": "No onion", "price": 0.0},
+        {"id": "no_cilantro", "name": "No cilantro", "price": 0.0}
+      ],
+      "dietary_tags": ["vegan", "vegetarian"],
+      "tags": []
+    },
+    {
+      "id": "quesadilla_cheese",
+      "category": "quesadillas",
+      "name": "Cheese Quesadilla",
+      "description": "Melted Monterey Jack and cheddar in a flour tortilla. Served with sour cream and salsa.",
+      "price": 9.49,
+      "available": true,
+      "options": {
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5}
+      ],
+      "dietary_tags": ["vegetarian", "contains_dairy", "contains_gluten"],
+      "tags": []
+    },
+    {
+      "id": "quesadilla_meat",
+      "category": "quesadillas",
+      "name": "Meat Quesadilla",
+      "description": "Choose your protein, melted cheese in a flour tortilla. Served with sour cream and salsa.",
+      "price": 12.99,
+      "available": true,
+      "options": {
+        "protein": {"choices": ["birria", "carne_asada", "al_pastor", "pollo_asado", "carnitas", "veggie"], "required": true},
+        "salsa": {"choices": ["mild", "medium", "hot", "habanero"], "default": "medium", "required": false}
+      },
+      "modifiers": [
+        {"id": "add_guac", "name": "Add guacamole", "price": 1.5},
+        {"id": "add_sour_cream", "name": "Add sour cream", "price": 0.5}
+      ],
+      "dietary_tags": ["contains_dairy", "contains_gluten"],
+      "tags": []
+    },
+    {
+      "id": "nachos_loaded",
+      "category": "nachos",
+      "name": "Loaded Nachos",
+      "description": "Tortilla chips loaded with your protein, cheese, beans, jalapeños, sour cream, guac, and pico.",
+      "price": 13.99,
+      "available": true,
+      "options": {
+        "protein": {"choices": ["birria", "carne_asada", "al_pastor", "pollo_asado", "carnitas", "veggie"], "required": true}
+      },
+      "modifiers": [
+        {"id": "no_jalapeno", "name": "No jalapeños", "price": 0.0},
+        {"id": "no_sour_cream", "name": "No sour cream", "price": 0.0},
+        {"id": "extra_cheese", "name": "Extra cheese", "price": 1.5}
+      ],
+      "dietary_tags": ["contains_dairy"],
+      "tags": []
+    },
+    {
+      "id": "side_chips_salsa",
+      "category": "sides",
+      "name": "Chips & Salsa",
+      "description": "House-made tortilla chips with fresh salsa.",
+      "price": 3.99,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegan", "vegetarian"],
+      "tags": []
+    },
+    {
+      "id": "side_chips_guac",
+      "category": "sides",
+      "name": "Chips & Guacamole",
+      "description": "House-made tortilla chips with fresh guacamole.",
+      "price": 5.99,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegan", "vegetarian"],
+      "tags": []
+    },
+    {
+      "id": "side_rice",
+      "category": "sides",
+      "name": "Mexican Rice",
+      "description": "Tomato-based Mexican rice. Made with chicken stock.",
+      "price": 3.49,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegetarian", "contains_chicken_stock"],
+      "tags": []
+    },
+    {
+      "id": "side_beans_black",
+      "category": "sides",
+      "name": "Black Beans",
+      "description": "Slow-cooked black beans.",
+      "price": 3.49,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegan", "vegetarian"],
+      "tags": []
+    },
+    {
+      "id": "side_elote",
+      "category": "sides",
+      "name": "Elote",
+      "description": "Mexican street corn with cotija, lime, and chili.",
+      "price": 4.49,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegetarian", "contains_dairy"],
+      "tags": []
+    },
+    {
+      "id": "drink_horchata",
+      "category": "drinks",
+      "name": "Horchata",
+      "description": "House-made cinnamon rice milk drink.",
+      "price": 3.99,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegetarian", "contains_dairy"],
+      "tags": []
+    },
+    {
+      "id": "drink_jarritos",
+      "category": "drinks",
+      "name": "Jarritos",
+      "description": "Mexican fruit-flavored soda. Choose your flavor.",
+      "price": 2.99,
+      "available": true,
+      "options": {
+        "flavor": {"choices": ["mandarin", "lime", "tamarind", "pineapple"], "required": true}
+      },
+      "modifiers": [],
+      "dietary_tags": ["vegan", "vegetarian"],
+      "tags": []
+    },
+    {
+      "id": "drink_coke_mexican",
+      "category": "drinks",
+      "name": "Mexican Coca-Cola",
+      "description": "Glass-bottled Mexican Coke (made with cane sugar).",
+      "price": 3.49,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegan", "vegetarian"],
+      "tags": ["coke", "mexican coke", "coca cola"]
+    },
+    {
+      "id": "drink_water",
+      "category": "drinks",
+      "name": "Bottled Water",
+      "description": "16oz bottled spring water.",
+      "price": 1.99,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegan", "vegetarian"],
+      "tags": []
+    },
+    {
+      "id": "dessert_churros",
+      "category": "desserts",
+      "name": "Churros (3pc)",
+      "description": "Cinnamon-sugar fried dough sticks. Served with chocolate dipping sauce.",
+      "price": 4.99,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegetarian", "contains_gluten", "contains_dairy"],
+      "tags": []
+    },
+    {
+      "id": "dessert_flan",
+      "category": "desserts",
+      "name": "Flan",
+      "description": "Classic Mexican caramel custard.",
+      "price": 5.49,
+      "available": true,
+      "options": {},
+      "modifiers": [],
+      "dietary_tags": ["vegetarian", "contains_dairy"],
+      "tags": []
+    }
+  ]
+}

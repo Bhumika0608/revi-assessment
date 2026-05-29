@@ -1,0 +1,1424 @@
+[
+  {
+    "id": "tc_01_simple_birria_coke",
+    "title": "Simple multi-item (provided example 01)",
+    "category": "simple",
+    "turns": [
+      "Hi, can I get two birria tacos and a Mexican Coke?",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 2
+      },
+      {
+        "item_id": "drink_coke_mexican",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 13.47,
+    "notes": "Public test case 01. Subtotal: 2×4.99 + 3.49 = 13.47"
+  },
+  {
+    "id": "tc_02_modifier_guac",
+    "title": "Order with modifier (provided example 02)",
+    "category": "modifiers",
+    "turns": [
+      "I'll have a chicken bowl with extra guacamole, please.",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1,
+        "modifiers": [
+          "add_guac"
+        ]
+      }
+    ],
+    "expected_subtotal": 13.99,
+    "notes": "Public test case 02. bowl_pollo $12.49 + add_guac $1.50 = $13.99"
+  },
+  {
+    "id": "tc_03_ambiguous_burrito",
+    "title": "Ambiguous request — must clarify (provided example 03)",
+    "category": "ambiguous",
+    "turns": [
+      "I want a burrito"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Must ask which burrito (birria, california, veggie, build your own). Must NOT silently pick one."
+  },
+  {
+    "id": "tc_04_single_item_flan",
+    "title": "Single item — flan",
+    "category": "simple",
+    "turns": [
+      "Can I get the flan?",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "dessert_flan",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 5.49,
+    "notes": "Unambiguous. Should confirm without unnecessary questions."
+  },
+  {
+    "id": "tc_05_single_item_chips_guac",
+    "title": "Single item — chips and guac",
+    "category": "simple",
+    "turns": [
+      "One chips and guac please",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "side_chips_guac",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 5.99,
+    "notes": "Should resolve to side_chips_guac. No clarification needed."
+  },
+  {
+    "id": "tc_06_three_items",
+    "title": "Three distinct items",
+    "category": "simple",
+    "turns": [
+      "I'd like a pollo bowl, chips and salsa, and a horchata",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1
+      },
+      {
+        "item_id": "side_chips_salsa",
+        "quantity": 1
+      },
+      {
+        "item_id": "drink_horchata",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 20.47,
+    "notes": "12.49 + 3.99 + 3.99 = 20.47"
+  },
+  {
+    "id": "tc_07_quantity_three",
+    "title": "Three of the same item",
+    "category": "simple",
+    "turns": [
+      "Three al pastor tacos please",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_al_pastor",
+        "quantity": 3
+      }
+    ],
+    "expected_subtotal": 13.47,
+    "notes": "3 × $4.49 = $13.47. Quantity must be 3, not 1 or 2."
+  },
+  {
+    "id": "tc_08_no_cilantro_modifier",
+    "title": "Modifier: no cilantro",
+    "category": "modifiers",
+    "turns": [
+      "Birria taco, no cilantro please",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1,
+        "modifiers": [
+          "no_cilantro"
+        ]
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "no_cilantro modifier is $0.00. Subtotal unchanged."
+  },
+  {
+    "id": "tc_09_salsa_option",
+    "title": "Option: habanero salsa",
+    "category": "modifiers",
+    "turns": [
+      "I'll take a veggie taco with habanero salsa",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_veggie",
+        "quantity": 1,
+        "options": {
+          "salsa": "habanero"
+        }
+      }
+    ],
+    "expected_subtotal": 3.99,
+    "notes": "Option does not affect price. Should store salsa=habanero in options."
+  },
+  {
+    "id": "tc_10_multiple_modifiers",
+    "title": "Multiple modifiers on burrito",
+    "category": "modifiers",
+    "turns": [
+      "Carne asada burrito with extra meat and sour cream",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "burrito_california",
+        "quantity": 1,
+        "modifiers": [
+          "extra_meat",
+          "add_sour_cream"
+        ]
+      }
+    ],
+    "expected_subtotal": 16.99,
+    "notes": "$13.49 + extra_meat $3.00 + sour_cream $0.50 = $16.99. Note: carne asada burrito = burrito_california."
+  },
+  {
+    "id": "tc_11_no_onion_no_cilantro",
+    "title": "Two negative modifiers",
+    "category": "modifiers",
+    "turns": [
+      "Al pastor taco, no onion and no cilantro",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_al_pastor",
+        "quantity": 1,
+        "modifiers": [
+          "no_onion",
+          "no_cilantro"
+        ]
+      }
+    ],
+    "expected_subtotal": 4.49,
+    "notes": "Both modifiers are $0.00."
+  },
+  {
+    "id": "tc_12_add_guac_to_quesadilla",
+    "title": "Modifier: add guac to quesadilla",
+    "category": "modifiers",
+    "turns": [
+      "Cheese quesadilla with guac please",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "quesadilla_cheese",
+        "quantity": 1,
+        "modifiers": [
+          "add_guac"
+        ]
+      }
+    ],
+    "expected_subtotal": 10.99,
+    "notes": "$9.49 + add_guac $1.50 = $10.99"
+  },
+  {
+    "id": "tc_13_ambiguous_taco",
+    "title": "Ambiguous: 'a taco'",
+    "category": "ambiguous",
+    "turns": [
+      "Give me a taco"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Many taco options exist. Must ask which type. Must NOT hallucinate a selection."
+  },
+  {
+    "id": "tc_14_ambiguous_quesadilla",
+    "title": "Ambiguous: 'a quesadilla'",
+    "category": "ambiguous",
+    "turns": [
+      "I'll have a quesadilla"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Cheese or meat? If meat, which protein? Must ask."
+  },
+  {
+    "id": "tc_15_ambiguous_nachos_no_protein",
+    "title": "Ambiguous: nachos without protein",
+    "category": "ambiguous",
+    "turns": [
+      "I want nachos"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Loaded Nachos requires protein option. Must ask which protein."
+  },
+  {
+    "id": "tc_16_ambiguous_jarritos_no_flavor",
+    "title": "Ambiguous: Jarritos without flavor",
+    "category": "ambiguous",
+    "turns": [
+      "Can I get a Jarritos?"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Jarritos has required flavor option. Must ask: mandarin, lime, tamarind, or pineapple."
+  },
+  {
+    "id": "tc_17_ambiguous_build_your_own",
+    "title": "Ambiguous: build your own burrito without protein",
+    "category": "ambiguous",
+    "turns": [
+      "Build your own burrito please"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "protein is a required option. Must ask which protein before confirming."
+  },
+  {
+    "id": "tc_18_not_on_menu_pizza",
+    "title": "Item not on menu: pizza",
+    "category": "refusal",
+    "turns": [
+      "Can I get a pizza?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Pizza is not on menu. Agent should say we don't carry it and offer alternatives — status in_progress (still helping). REFUSED: is only for off-topic requests, not off-menu food. Must NOT hallucinate a pizza item."
+  },
+  {
+    "id": "tc_19_not_on_menu_alcohol",
+    "title": "Item not on menu: margarita",
+    "category": "refusal",
+    "turns": [
+      "I'll have a margarita"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Margarita not on menu. Agent should say we don't carry it and suggest drinks — status in_progress. Must NOT hallucinate a margarita."
+  },
+  {
+    "id": "tc_20_out_of_stock_shrimp_taco",
+    "title": "Out-of-stock item",
+    "category": "refusal",
+    "turns": [
+      "Can I get the shrimp taco?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "taco_shrimp has available=false. Agent must inform customer it's unavailable and offer alternatives. Status is in_progress because agent can offer to help with something else."
+  },
+  {
+    "id": "tc_21_not_on_menu_chicken_sandwich",
+    "title": "Item not on menu: chicken sandwich",
+    "category": "refusal",
+    "turns": [
+      "Give me a chicken sandwich"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Chicken sandwich not on menu. Agent should say we don't carry it — status in_progress. Must NOT call tortas or other items 'chicken sandwich options'. Use exact item names from the menu."
+  },
+  {
+    "id": "tc_22_off_topic_weather",
+    "title": "Off-topic: weather",
+    "category": "refusal",
+    "turns": [
+      "What's the weather like in Miami today?"
+    ],
+    "expected_status": "refused",
+    "notes": "Completely off-topic. Must respond with REFUSED: prefix."
+  },
+  {
+    "id": "tc_23_off_topic_joke",
+    "title": "Off-topic: joke request",
+    "category": "refusal",
+    "turns": [
+      "Tell me a joke"
+    ],
+    "expected_status": "refused",
+    "notes": "Off-topic. Must refuse gracefully."
+  },
+  {
+    "id": "tc_24_off_topic_math",
+    "title": "Off-topic: math problem",
+    "category": "refusal",
+    "turns": [
+      "What's 847 times 23?"
+    ],
+    "expected_status": "refused",
+    "notes": "Off-topic. Must refuse and redirect to ordering."
+  },
+  {
+    "id": "tc_25_off_topic_code",
+    "title": "Off-topic: code help",
+    "category": "refusal",
+    "turns": [
+      "Can you help me debug my Python code?"
+    ],
+    "expected_status": "refused",
+    "notes": "Off-topic. Refuse and redirect."
+  },
+  {
+    "id": "tc_26_multi_turn_add_item",
+    "title": "Multi-turn: add item then confirm",
+    "category": "multi_turn",
+    "turns": [
+      "Can I get a birria taco?",
+      "Also add a Mexican Coke",
+      "That's all, go ahead and place it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      },
+      {
+        "item_id": "drink_coke_mexican",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 8.48,
+    "notes": "4.99 + 3.49 = 8.48. Both items must appear in final order."
+  },
+  {
+    "id": "tc_27_multi_turn_clarify_then_order",
+    "title": "Multi-turn: clarification → resolution",
+    "category": "multi_turn",
+    "turns": [
+      "I want a burrito",
+      "Birria please",
+      "Place the order"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "burrito_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 13.99,
+    "notes": "Turn 1 should clarify, turn 2 resolves, turn 3 confirms. Final item must be burrito_birria."
+  },
+  {
+    "id": "tc_28_multi_turn_quantity_change",
+    "title": "Multi-turn: quantity correction",
+    "category": "multi_turn",
+    "turns": [
+      "I want a carne asada taco",
+      "Actually make that two",
+      "Yes, confirm it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_carne_asada",
+        "quantity": 2
+      }
+    ],
+    "expected_subtotal": 8.98,
+    "notes": "2 × $4.49 = $8.98. Quantity must reflect the correction."
+  },
+  {
+    "id": "tc_29_multi_turn_add_modifier_later",
+    "title": "Multi-turn: modifier added after initial order",
+    "category": "multi_turn",
+    "turns": [
+      "I'll have a pollo bowl",
+      "Can you add extra guacamole to that?",
+      "That's it, place it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1,
+        "modifiers": [
+          "add_guac"
+        ]
+      }
+    ],
+    "expected_subtotal": 13.99,
+    "notes": "$12.49 + $1.50 add_guac = $13.99"
+  },
+  {
+    "id": "tc_30_dietary_vegan_query",
+    "title": "Dietary: vegan options question",
+    "category": "dietary",
+    "turns": [
+      "I'm vegan, what can I get?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should list vegan options (bowl_veggie, side_chips_salsa, side_chips_guac, side_beans_black, drinks, etc). Must NOT list non-vegan items as vegan."
+  },
+  {
+    "id": "tc_31_dietary_gluten_free_warning",
+    "title": "Dietary: gluten concern with fish taco",
+    "category": "dietary",
+    "turns": [
+      "I'm trying to avoid gluten — is the fish taco okay?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "taco_fish has contains_gluten dietary tag (beer batter). Agent must warn the customer."
+  },
+  {
+    "id": "tc_32_dietary_dairy_question",
+    "title": "Dietary: dairy-free inquiry",
+    "category": "dietary",
+    "turns": [
+      "I can't eat dairy, what should I get?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should identify dairy-containing items to avoid and suggest dairy-free options."
+  },
+  {
+    "id": "tc_33_edge_price_query",
+    "title": "Edge: price query without ordering",
+    "category": "edge",
+    "turns": [
+      "How much does the birria taco cost?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should answer $4.99 without placing an order. Status stays in_progress."
+  },
+  {
+    "id": "tc_34_edge_typo",
+    "title": "Edge: typo in item name",
+    "category": "edge",
+    "turns": [
+      "Can I get a birria tcao?",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "notes": "Typo 'tcao' should fuzzy-match to 'taco'. FTS5 + rapidfuzz should recover."
+  },
+  {
+    "id": "tc_35_edge_restaurant_hours",
+    "title": "Edge: restaurant info question",
+    "category": "edge",
+    "turns": [
+      "What are your hours?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Legitimate restaurant question, not off-topic. Should answer 11am-10pm daily without refusing."
+  },
+  {
+    "id": "tc_36_multi_item_per_item_modifiers",
+    "title": "Per-item modifiers in multi-item order",
+    "category": "modifiers",
+    "turns": [
+      "Birria taco with no cilantro, and a pollo bowl with extra guac please",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1,
+        "modifiers": [
+          "no_cilantro"
+        ]
+      },
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1,
+        "modifiers": [
+          "add_guac"
+        ]
+      }
+    ],
+    "expected_subtotal": 18.98,
+    "notes": "Tests that modifiers are applied to the correct item in a multi-item order. taco_birria $4.99 + no_cilantro $0.00 + bowl_pollo $12.49 + add_guac $1.50 = $18.98"
+  },
+  {
+    "id": "tc_37_out_of_stock_recovery",
+    "title": "Out-of-stock: agent informs and customer picks alternative",
+    "category": "multi_turn",
+    "turns": [
+      "Can I get the shrimp taco?",
+      "Okay, I will have the birria taco then",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Tests full out-of-stock recovery flow: agent informs unavailability (in_progress), customer selects alternative, agent confirms. taco_shrimp is available=false in DB. taco_birria $4.99."
+  },
+  {
+    "id": "tc_38_mind_change_item_swap",
+    "title": "Mind change twice: item swap back and forth",
+    "category": "multi_turn",
+    "turns": [
+      "I want a pollo bowl",
+      "Actually, switch that to a birria burrito",
+      "Wait, no — I want the pollo bowl after all. Go ahead and place it."
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 12.49,
+    "notes": "Tests LLM-as-cart under double reversal. Final preference (pollo bowl) must win. burrito_birria from turn 2 must NOT appear in the final order. bowl_pollo $12.49."
+  },
+  {
+    "id": "tc_39_mind_change_quantity",
+    "title": "Mind change twice: quantity up then down",
+    "category": "multi_turn",
+    "turns": [
+      "I'll have two birria tacos",
+      "Make that three actually",
+      "Actually you know what, just one is fine. Confirm it."
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Quantity changed twice (2→3→1). Final quantity must be 1, not 2 or 3. Tests that agent tracks the most recently stated quantity. taco_birria $4.99."
+  },
+  {
+    "id": "tc_40_frustrated_out_of_stock",
+    "title": "Frustrated customer: out-of-stock then orders with frustration",
+    "category": "multi_turn",
+    "turns": [
+      "Shrimp taco, please",
+      "Seriously?! It's unavailable? Ugh. Fine, just give me a birria taco instead.",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Same recovery flow as tc_37 but with expressed frustration. Agent must stay warm and complete the order despite the negative tone in turn 2. taco_shrimp is available=false. Final order: taco_birria $4.99."
+  },
+  {
+    "id": "tc_41_frustrated_vent_then_orders",
+    "title": "Frustrated customer: pure vent turn, then orders",
+    "category": "multi_turn",
+    "turns": [
+      "Ugh, I've been waiting forever. This is so frustrating.",
+      "Whatever. Just give me a birria taco.",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Turn 1 is pure frustration — no food request, no off-topic subject. Agent must NOT respond with REFUSED: (that sentinel is only for off-topic like weather/math/jokes). Must stay in_progress and redirect warmly. Turn 2 places the order. taco_birria $4.99."
+  },
+  {
+    "id": "tc_42_insists_off_menu_then_relents",
+    "title": "Customer insists on off-menu item twice, then orders real item",
+    "category": "multi_turn",
+    "turns": [
+      "I want a cheesesteak",
+      "Come on, you must have something like it. Just make me one.",
+      "Fine. Give me chips and guac then.",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "side_chips_guac",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 5.99,
+    "notes": "Tests agent holds firm on not-on-menu without hallucinating under social pressure. Status must stay in_progress throughout turns 1-2 (not refused — REFUSED: is for off-topic, not off-menu food). Agent must NOT invent a cheesesteak or rename another item as one. Turn 3 places the real order. side_chips_guac $5.99."
+  },
+  {
+    "id": "tc_43_full_order_reset",
+    "title": "Customer cancels full order and starts fresh",
+    "category": "multi_turn",
+    "turns": [
+      "I want a pollo bowl and a Mexican Coke",
+      "Wait, cancel all of that. Fresh start — just give me the flan.",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "dessert_flan",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 5.49,
+    "notes": "Tests LLM-as-cart full reset. bowl_pollo and drink_coke_mexican must NOT appear in the final confirmed order. Only dessert_flan should be placed. Tests that the agent correctly discards previous items when customer explicitly cancels and restarts. dessert_flan $5.49."
+  },
+  {
+    "id": "tc_44_spanish_one_birria",
+    "title": "Spanish: single birria taco",
+    "category": "spanish",
+    "turns": [
+      "Quiero un taco de birria, por favor",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Most basic Spanish order. birria → taco_birria."
+  },
+  {
+    "id": "tc_45_spanish_two_carne_asada",
+    "title": "Spanish: two carne asada tacos",
+    "category": "spanish",
+    "turns": [
+      "Dame dos tacos de carne asada",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_carne_asada",
+        "quantity": 2
+      }
+    ],
+    "expected_subtotal": 8.98,
+    "notes": "2 × $4.49 = $8.98. Tests Spanish quantity word 'dos'."
+  },
+  {
+    "id": "tc_46_spanish_al_pastor_with_horchata",
+    "title": "Spanish: al pastor + horchata multi-item",
+    "category": "spanish",
+    "turns": [
+      "Quiero un taco al pastor y una horchata",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_al_pastor",
+        "quantity": 1
+      },
+      {
+        "item_id": "drink_horchata",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 8.48,
+    "notes": "$4.49 + $3.99 = $8.48. Multi-item Spanish order."
+  },
+  {
+    "id": "tc_47_spanish_pollo_bowl",
+    "title": "Spanish: pollo bowl",
+    "category": "spanish",
+    "turns": [
+      "Un bowl de pollo por favor",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 12.49,
+    "notes": "pollo → chicken → bowl_pollo."
+  },
+  {
+    "id": "tc_48_mixed_language_carnitas",
+    "title": "Mixed language: English sentence with Spanish protein",
+    "category": "spanish",
+    "turns": [
+      "Can I get a carnitas taco please?",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_carnitas",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.49,
+    "notes": "Common in Miami: English structure, Spanish protein."
+  },
+  {
+    "id": "tc_49_spanish_dietary_question",
+    "title": "Spanish: vegetarian options question (informational)",
+    "category": "spanish",
+    "turns": [
+      "¿Tienen opciones vegetarianas?"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Should call search_faq or list vegetarian items. No order placed."
+  },
+  {
+    "id": "tc_50_spanish_no_cilantro",
+    "title": "Spanish: birria taco with modifier exclusion",
+    "category": "spanish",
+    "turns": [
+      "Un taco de birria sin cilantro",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1,
+        "modifiers": [
+          "no_cilantro"
+        ]
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "'sin' = without. Modifier should be no_cilantro."
+  },
+  {
+    "id": "tc_51_spanish_cheese_quesadilla",
+    "title": "Spanish: cheese quesadilla",
+    "category": "spanish",
+    "turns": [
+      "Quiero una quesadilla de queso",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "quesadilla_cheese",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 9.49,
+    "notes": "queso → cheese → quesadilla_cheese (not the meat one)."
+  },
+  {
+    "id": "tc_52_spanish_camaron_out_of_stock",
+    "title": "Spanish: camarón taco (out of stock)",
+    "category": "spanish",
+    "turns": [
+      "Quiero un taco de camarón"
+    ],
+    "expected_status": "in_progress",
+    "notes": "taco_shrimp is unavailable. Agent should inform in plain language, stay in_progress."
+  },
+  {
+    "id": "tc_53_spanish_veggie_water",
+    "title": "Spanish: veggie taco + water",
+    "category": "spanish",
+    "turns": [
+      "Quiero un taco veggie y una agua",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_veggie",
+        "quantity": 1
+      },
+      {
+        "item_id": "drink_water",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 5.98,
+    "notes": "$3.99 + $1.99 = $5.98."
+  },
+  {
+    "id": "tc_54_price_query_single_item",
+    "title": "Price query without ordering",
+    "category": "info_query",
+    "turns": [
+      "How much is the birria taco?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should state price ($4.99). Should NOT add to cart. Should NOT signal checkout."
+  },
+  {
+    "id": "tc_55_price_query_cheapest",
+    "title": "Cheapest item query",
+    "category": "info_query",
+    "turns": [
+      "What's the cheapest thing on the menu?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Bottled water at $1.99 is cheapest. Should answer informationally."
+  },
+  {
+    "id": "tc_56_what_is_query",
+    "title": "What-is descriptor query",
+    "category": "info_query",
+    "turns": [
+      "What's a birria taco?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should describe the item and its price. Should NOT auto-add to cart."
+  },
+  {
+    "id": "tc_57_recommendation_query",
+    "title": "Recommendation request",
+    "category": "info_query",
+    "turns": [
+      "What do you recommend?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Open-ended. Should suggest items, not silently pick one and add."
+  },
+  {
+    "id": "tc_58_menu_browse",
+    "title": "Menu browse intent",
+    "category": "info_query",
+    "turns": [
+      "Show me the menu"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should list categories or popular items, not dump all 10k."
+  },
+  {
+    "id": "tc_59_popular_items_query",
+    "title": "Popular items query",
+    "category": "info_query",
+    "turns": [
+      "What's popular here?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Similar to recommendation. No silent add."
+  },
+  {
+    "id": "tc_60_price_then_order",
+    "title": "Price query followed by order",
+    "category": "info_query",
+    "turns": [
+      "How much is the birria taco?",
+      "Okay I'll take one, that's it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Turn 1 informational only. Turn 2 places order with done signal."
+  },
+  {
+    "id": "tc_61_hours_query",
+    "title": "Restaurant hours query",
+    "category": "info_query",
+    "turns": [
+      "What time do you close?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "FAQ. Should answer 10pm via search_faq."
+  },
+  {
+    "id": "tc_62_greeting_hi",
+    "title": "Bare greeting",
+    "category": "conversational",
+    "turns": [
+      "Hi"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should greet and invite the order, not refuse and not silently order."
+  },
+  {
+    "id": "tc_63_good_morning",
+    "title": "Good morning greeting",
+    "category": "conversational",
+    "turns": [
+      "Good morning!"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Same as tc_62 — should engage politely."
+  },
+  {
+    "id": "tc_64_greeting_then_order",
+    "title": "Greeting then immediate order",
+    "category": "conversational",
+    "turns": [
+      "Hey there!",
+      "Can I get a birria taco?",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Greeting should not block ordering on subsequent turns."
+  },
+  {
+    "id": "tc_65_thanks_as_done_signal",
+    "title": "Thanks doubles as checkout signal",
+    "category": "conversational",
+    "turns": [
+      "I'll get a flan please",
+      "Thanks, that's all I need"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "dessert_flan",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 5.49,
+    "notes": "'that's all I need' is in the done-signal list."
+  },
+  {
+    "id": "tc_66_polite_open",
+    "title": "Polite opener",
+    "category": "conversational",
+    "turns": [
+      "Hi, can I please order something?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Should invite the actual order, not refuse and not silently pick."
+  },
+  {
+    "id": "tc_67_long_browse_then_order",
+    "title": "Long flow: browse → order → modify → checkout",
+    "category": "long_multi_turn",
+    "turns": [
+      "Hi, what do you recommend?",
+      "Tell me about the birria taco",
+      "Okay I'll have one",
+      "Actually, make it two",
+      "Add a Mexican Coke too",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 2
+      },
+      {
+        "item_id": "drink_coke_mexican",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 13.47,
+    "notes": "2 × $4.99 + $3.49 = $13.47. Tests long browse + quantity change + add + done."
+  },
+  {
+    "id": "tc_68_long_iterative_modifier_build",
+    "title": "Long flow: incremental modifier additions",
+    "category": "long_multi_turn",
+    "turns": [
+      "I'll have a chicken bowl",
+      "Add extra guac",
+      "And add cheese",
+      "Also extra meat please",
+      "Okay that's it, place it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1,
+        "modifiers": [
+          "add_guac",
+          "add_cheese",
+          "extra_meat"
+        ]
+      }
+    ],
+    "expected_subtotal": 17.74,
+    "notes": "$12.49 + $1.50 + $0.75 + $3.00 = $17.74. Modifiers accumulate across turns."
+  },
+  {
+    "id": "tc_69_long_remove_mid_flow",
+    "title": "Long flow: add, then remove, then confirm",
+    "category": "long_multi_turn",
+    "turns": [
+      "I'll have a birria taco",
+      "And a carne asada taco",
+      "Actually, remove the carne asada",
+      "Yeah just the birria, place it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Tests remove_from_cart mid-conversation. Final cart has only birria."
+  },
+  {
+    "id": "tc_70_long_clarify_then_add_modifier",
+    "title": "Long flow: ambiguous burrito → clarify → modify → confirm",
+    "category": "long_multi_turn",
+    "turns": [
+      "I want a burrito",
+      "Birria",
+      "With extra cheese",
+      "How much is that?",
+      "Sounds good, that's it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "burrito_birria",
+        "quantity": 1,
+        "modifiers": [
+          "add_cheese"
+        ]
+      }
+    ],
+    "expected_subtotal": 14.74,
+    "notes": "$13.99 + $0.75 = $14.74. Turn 4 is a price query mid-order; agent should answer without losing cart."
+  },
+  {
+    "id": "tc_71_long_multi_category_order",
+    "title": "Long flow: taco + drink + dessert across many turns",
+    "category": "long_multi_turn",
+    "turns": [
+      "What kind of tacos do you have?",
+      "What's the most popular?",
+      "I'll try a birria",
+      "Add a Mexican Coke",
+      "And a flan for dessert",
+      "Confirm my order"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      },
+      {
+        "item_id": "drink_coke_mexican",
+        "quantity": 1
+      },
+      {
+        "item_id": "dessert_flan",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 13.97,
+    "notes": "$4.99 + $3.49 + $5.49 = $13.97. Multi-category order across long conversation."
+  },
+  {
+    "id": "tc_72_combo_max_paid_modifiers",
+    "title": "Bowl with all four paid modifiers",
+    "category": "modifier_combos",
+    "turns": [
+      "Pollo bowl with extra meat, extra cheese, sour cream, and guac",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "bowl_pollo",
+        "quantity": 1,
+        "modifiers": [
+          "extra_meat",
+          "add_cheese",
+          "add_sour_cream",
+          "add_guac"
+        ]
+      }
+    ],
+    "expected_subtotal": 18.24,
+    "notes": "$12.49 + $3.00 + $0.75 + $0.50 + $1.50 = $18.24."
+  },
+  {
+    "id": "tc_73_combo_paid_and_free_mixed",
+    "title": "Birria taco: add cheese + no cilantro",
+    "category": "modifier_combos",
+    "turns": [
+      "Birria taco with cheese and no cilantro",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1,
+        "modifiers": [
+          "add_cheese",
+          "no_cilantro"
+        ]
+      }
+    ],
+    "expected_subtotal": 5.74,
+    "notes": "$4.99 + $0.75 (cheese) + $0 (no_cilantro) = $5.74."
+  },
+  {
+    "id": "tc_74_combo_quantity_times_paid_mod",
+    "title": "Three birria tacos all with cheese",
+    "category": "modifier_combos",
+    "turns": [
+      "Three birria tacos, all with extra cheese",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 3,
+        "modifiers": [
+          "add_cheese"
+        ]
+      }
+    ],
+    "expected_subtotal": 17.22,
+    "notes": "3 × ($4.99 + $0.75) = $17.22. Tests qty × (base + upcharge)."
+  },
+  {
+    "id": "tc_75_combo_per_item_modifiers_multi",
+    "title": "Multi-item with different per-item modifiers",
+    "category": "modifier_combos",
+    "turns": [
+      "Two pollo tacos with cheese, and one carne asada taco with extra meat",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_pollo",
+        "quantity": 2,
+        "modifiers": [
+          "add_cheese"
+        ]
+      },
+      {
+        "item_id": "taco_carne_asada",
+        "quantity": 1,
+        "modifiers": [
+          "extra_meat"
+        ]
+      }
+    ],
+    "expected_subtotal": 17.57,
+    "notes": "2×($4.29+$0.75) + 1×($4.49+$3.00) = $10.08 + $7.49 = $17.57."
+  },
+  {
+    "id": "tc_76_combo_only_removals",
+    "title": "Only exclusion modifiers",
+    "category": "modifier_combos",
+    "turns": [
+      "Birria taco no onion no cilantro",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1,
+        "modifiers": [
+          "no_onion",
+          "no_cilantro"
+        ]
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Free modifiers only. Subtotal unchanged."
+  },
+  {
+    "id": "tc_77_combo_nachos_extra_cheese",
+    "title": "Loaded nachos with paid modifier and required protein",
+    "category": "modifier_combos",
+    "turns": [
+      "Loaded nachos with pollo asado and extra cheese",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "nachos_loaded",
+        "quantity": 1,
+        "modifiers": [
+          "extra_cheese"
+        ]
+      }
+    ],
+    "expected_subtotal": 15.49,
+    "notes": "$13.99 + $1.50 = $15.49. Protein option provided but not part of scored shape."
+  },
+  {
+    "id": "tc_78_vegan_with_chicken",
+    "title": "Conflicting: vegan + chicken",
+    "category": "conflicting",
+    "turns": [
+      "I want a vegan taco with chicken"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Vegan and chicken are mutually exclusive. Agent should clarify, not silently pick one."
+  },
+  {
+    "id": "tc_79_dairy_free_quesadilla",
+    "title": "Conflicting: dairy-free + cheese quesadilla",
+    "category": "conflicting",
+    "turns": [
+      "I'm dairy free, can I get a cheese quesadilla?"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Cheese quesadilla has dairy. Agent should flag the conflict and suggest an alternative."
+  },
+  {
+    "id": "tc_80_gluten_free_burrito",
+    "title": "Conflicting: gluten-free + burrito (flour tortilla)",
+    "category": "conflicting",
+    "turns": [
+      "Do you have a gluten-free burrito?"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "All burritos use flour tortillas. Agent should explain and suggest a bowl or corn-tortilla taco."
+  },
+  {
+    "id": "tc_81_vegan_with_meat",
+    "title": "Conflicting: vegan order with paid meat modifier",
+    "category": "conflicting",
+    "turns": [
+      "Veggie taco with extra meat please"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Asking for meat on a vegetarian-tagged item is contradictory. Agent should clarify intent."
+  },
+  {
+    "id": "tc_82_dairy_allergy_options",
+    "title": "Allergen: dairy allergy → what can I have?",
+    "category": "allergen",
+    "turns": [
+      "I'm allergic to dairy, what can I have?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Agent should consult FAQ and list dairy-free items (e.g. veggie taco, sides, water)."
+  },
+  {
+    "id": "tc_83_shellfish_allergy_warning",
+    "title": "Allergen: shellfish allergy",
+    "category": "allergen",
+    "turns": [
+      "I'm allergic to shellfish, anything I should avoid?"
+    ],
+    "expected_status": "in_progress",
+    "notes": "Camarón taco contains shellfish (currently OOS but allergy info still matters). Agent should warn."
+  },
+  {
+    "id": "tc_84_celiac_then_order",
+    "title": "Allergen: celiac → confirm gluten-free → order",
+    "category": "allergen",
+    "turns": [
+      "I'm celiac, what's gluten-free?",
+      "I'll have a birria taco then",
+      "That's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 1
+      }
+    ],
+    "expected_subtotal": 4.99,
+    "notes": "Corn-tortilla tacos like birria are GF. Tests allergen-aware ordering ending in checkout."
+  },
+  {
+    "id": "tc_85_large_quantity",
+    "title": "Large quantity: 20 birria tacos",
+    "category": "quantity_edge",
+    "turns": [
+      "I'll have 20 birria tacos, that's all"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 20
+      }
+    ],
+    "expected_subtotal": 99.8,
+    "notes": "20 × $4.99 = $99.80. Tests bulk quantity handling."
+  },
+  {
+    "id": "tc_86_quantity_zero",
+    "title": "Nonsensical quantity: zero",
+    "category": "quantity_edge",
+    "turns": [
+      "Give me zero birria tacos"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Zero is nonsensical. Agent should clarify, not add 0 items."
+  },
+  {
+    "id": "tc_87_quantity_fractional",
+    "title": "Fractional quantity: half a taco",
+    "category": "quantity_edge",
+    "turns": [
+      "Can I get half a birria taco?"
+    ],
+    "expected_status": "in_progress",
+    "requires_clarification": true,
+    "notes": "Can't order fractional. Agent should clarify (round up? offer one?) — not silently order 1."
+  },
+  {
+    "id": "tc_88_quantity_word_dozen",
+    "title": "Word-quantity: a dozen",
+    "category": "quantity_edge",
+    "turns": [
+      "I'll have a dozen birria tacos, place it"
+    ],
+    "expected_status": "confirmed",
+    "expected_items": [
+      {
+        "item_id": "taco_birria",
+        "quantity": 12
+      }
+    ],
+    "expected_subtotal": 59.88,
+    "notes": "12 × $4.99 = $59.88. Tests word-to-number ('dozen' = 12)."
+  }
+]
