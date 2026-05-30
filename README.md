@@ -8,6 +8,78 @@ Built with the raw Anthropic SDK, SQLite + FTS5 + semantic embeddings (fastembed
 
 ---
 
+## Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                               CUSTOMER                                    │
+│                       (natural-language orders)                           │
+└─────────────────────────────────┬─────────────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼─────────────────────────────────────────┐
+│                       PRESENTATION LAYER · Streamlit                       │
+│                                                                            │
+│   ┌──────────────────────────────┐      ┌──────────────────────────────┐  │
+│   │  ui/app.py                   │      │  ui/pages/1_Inventory.py     │  │
+│   │  • Chat UI                   │      │  • Admin page (gated)        │  │
+│   │  • 4-step checkout flow      │      │  • restock · browse · log    │  │
+│   │  • per-turn trace expander   │      │                              │  │
+│   └──────────────────────────────┘      └──────────────────────────────┘  │
+└────────────────┬───────────────────────────────────────┬───────────────────┘
+                 │ take_order()                           │ deterministic
+                 │ (cart-building only)                   │ (NO LLM)
+                 ▼                                        ▼
+┌──────────────────────────────────┐    ┌──────────────────────────────────┐
+│      AGENT LAYER · agent/        │    │   CHECKOUT LAYER · db/ (Python)  │
+│                                  │    │                                  │
+│  ┌────────────────────────────┐  │    │  Step 1  fulfillment             │
+│  │ Pre-LLM short-circuits     │  │    │  Step 2  delivery.py → zone+fee  │
+│  │ • checkout signals         │  │    │  Step 3  tax.py → 8% tax         │
+│  │ • FAQ queries              │  │    │  Step 4  payment.py → Stripe     │
+│  └────────────────────────────┘  │    │                                  │
+│  ┌────────────────────────────┐  │    │  finalize.py (after success):    │
+│  │ ReAct loop (max 8 iters)   │  │    │  • save_order()                  │
+│  │ search → details → add     │  │    │  • decrement_inventory()         │
+│  │ → signal_checkout          │  │    │  • send_receipt() (email.py)     │
+│  └────────────────────────────┘  │    │  idempotent via order_id         │
+│  ┌────────────────────────────┐  │    └────────────────┬─────────────────┘
+│  │ Python enforcement         │  │                     │
+│  │ • validated_ids gate       │  │                     │
+│  │ • status from tool trace   │  │                     │
+│  │ • prices from DB           │  │                     │
+│  └────────────────────────────┘  │                     │
+│  prompts · tool_schemas · trace  │                     │
+└────────┬─────────────────┬───────┘                     │
+         │ 9 tools         │ LLM calls                    │
+         ▼                 │                              ▼
+┌──────────────────────────┼──────────────────────────────────────────────┐
+│                  DATA & SEARCH LAYER · db/ + SQLite                       │
+│                                                                          │
+│   ┌────────────────────────────┐      ┌────────────────────────────────┐ │
+│   │ db/search.py               │      │ data/menu.db (rebuilt from JSON)│ │
+│   │ • Semantic (fastembed/BGE) │      │ • menu_items (10,089 · FTS5)   │ │
+│   │ • FTS5 BM25          ─RRF─▶ │─────▶│ • inventory + inventory_log    │ │
+│   │ • rapidfuzz (typos)        │      │ • orders · payments            │ │
+│   └────────────────────────────┘      └────────────────────────────────┘ │
+│   in-memory caches: 10k items · embedding matrix                         │
+└────────────────────────────────┬─────────────────────────────────────────┘
+                                 │
+                                 ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│                           EXTERNAL SERVICES                                │
+│                                                                            │
+│   ┌─────────────────────┐  ┌─────────────────────┐  ┌──────────────────┐  │
+│   │ Anthropic API       │  │ Stripe (test mode)  │  │ Gmail SMTP       │  │
+│   │ • ReAct LLM calls   │  │ • PaymentIntent     │  │ • order receipts │  │
+│   │ • prompt-cached ~92%│  │ • card→pm_card_*    │  │ • optional       │  │
+│   └─────────────────────┘  └─────────────────────┘  └──────────────────┘  │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+**The core boundary:** the LLM has exactly one job — build the cart. Checkout, payment, tax, and order persistence run in deterministic Python with zero LLM calls. The agent never sees card data and never saves an order.
+
+---
+
 ## Quick Start
 
 ```bash
