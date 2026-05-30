@@ -12,23 +12,23 @@ Built with the raw Anthropic SDK, SQLite + FTS5 + semantic embeddings (fastembed
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                               CUSTOMER                                    │
-│                       (natural-language orders)                           │
-└─────────────────────────────────┬─────────────────────────────────────────┘
+│                               CUSTOMER                                  │
+│                       (natural-language orders)                         │
+└─────────────────────────────────┬───────────────────────────────────────┘
                                   │
 ┌─────────────────────────────────▼─────────────────────────────────────────┐
-│                       PRESENTATION LAYER · Streamlit                       │
-│                                                                            │
+│                       PRESENTATION LAYER · Streamlit                      │
+│                                                                           │
 │   ┌──────────────────────────────┐      ┌──────────────────────────────┐  │
 │   │  ui/app.py                   │      │  ui/pages/1_Inventory.py     │  │
 │   │  • Chat UI                   │      │  • Admin page (gated)        │  │
 │   │  • 4-step checkout flow      │      │  • restock · browse · log    │  │
 │   │  • per-turn trace expander   │      │                              │  │
 │   └──────────────────────────────┘      └──────────────────────────────┘  │
-└────────────────┬───────────────────────────────────────┬───────────────────┘
-                 │ take_order()                           │ deterministic
-                 │ (cart-building only)                   │ (NO LLM)
-                 ▼                                        ▼
+└────────────────┬───────────────────────────────────────┬──────────────────┘
+                 │ take_order()                          │ deterministic
+                 │ (cart-building only)                  │ (NO LLM)
+                 ▼                                       ▼
 ┌──────────────────────────────────┐    ┌──────────────────────────────────┐
 │      AGENT LAYER · agent/        │    │   CHECKOUT LAYER · db/ (Python)  │
 │                                  │    │                                  │
@@ -50,29 +50,29 @@ Built with the raw Anthropic SDK, SQLite + FTS5 + semantic embeddings (fastembed
 │  └────────────────────────────┘  │                     │
 │  prompts · tool_schemas · trace  │                     │
 └────────┬─────────────────┬───────┘                     │
-         │ 9 tools         │ LLM calls                    │
-         ▼                 │                              ▼
+         │ 9 tools         │ LLM calls                   │
+         ▼                 │                             ▼
 ┌──────────────────────────┼──────────────────────────────────────────────┐
-│                  DATA & SEARCH LAYER · db/ + SQLite                       │
-│                                                                          │
-│   ┌────────────────────────────┐      ┌────────────────────────────────┐ │
-│   │ db/search.py               │      │ data/menu.db (rebuilt from JSON)│ │
-│   │ • Semantic (fastembed/BGE) │      │ • menu_items (10,089 · FTS5)   │ │
-│   │ • FTS5 BM25          ─RRF─▶ │─────▶│ • inventory + inventory_log    │ │
-│   │ • rapidfuzz (typos)        │      │ • orders · payments            │ │
-│   └────────────────────────────┘      └────────────────────────────────┘ │
-│   in-memory caches: 10k items · embedding matrix                         │
-└────────────────────────────────┬─────────────────────────────────────────┘
+│                  DATA & SEARCH LAYER · db/ + SQLite                     │
+│                                                                         │
+│   ┌────────────────────────────┐      ┌──────────────────────────────── │
+│   │ db/search.py               │      │ data/menu.db (rebuilt from JSON │
+│   │ • Semantic (fastembed/BGE) │      │ • menu_items (10,089 · FTS5)    │
+│   │ • FTS5 BM25          ─RRF─▶│─────▶│ • inventory + inventory_log    │
+│   │ • rapidfuzz (typos)        │      │ • orders · payments             │
+│   └────────────────────────────┘      └──────────────────────────────── │
+│   in-memory caches: 10k items · embedding matrix                        │
+└────────────────────────────────┬────────────────────────────────────────┘
                                  │
                                  ▼
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                           EXTERNAL SERVICES                                │
-│                                                                            │
-│   ┌─────────────────────┐  ┌─────────────────────┐  ┌──────────────────┐  │
-│   │ Anthropic API       │  │ Stripe (test mode)  │  │ Gmail SMTP       │  │
-│   │ • ReAct LLM calls   │  │ • PaymentIntent     │  │ • order receipts │  │
-│   │ • prompt-cached ~92%│  │ • card→pm_card_*    │  │ • optional       │  │
-│   └─────────────────────┘  └─────────────────────┘  └──────────────────┘  │
+│                           EXTERNAL SERVICES                              │
+│                                                                          │
+│   ┌─────────────────────┐  ┌─────────────────────┐  ┌──────────────────┐ │
+│   │ Anthropic API       │  │ Stripe (test mode)  │  │ Gmail SMTP       │ │
+│   │ • ReAct LLM calls   │  │ • PaymentIntent     │  │ • order receipts │ │
+│   │ • prompt-cached ~92%│  │ • card→pm_card_*    │  │ • optional       │ │
+│   └─────────────────────┘  └─────────────────────┘  └──────────────────┘ │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
